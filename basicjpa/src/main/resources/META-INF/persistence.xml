@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+        https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+        version="3.0">
+    <persistence-unit name="basicjpa">
+        <properties>
+            <!--JDBC에서 사용하는 DB연결정보를 설정-->
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="oracle.jdbc.driver.OracleDriver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:oracle:thin:@localhost:1521:xe"/>
+            <property name="jakarta.persistence.jdbc.user" value="spring"/>
+            <property name="jakarta.persistence.jdbc.password" value="spring"/>
+
+            <!--
+                방언설정
+                사용하는 DB에 대한 설정
+            -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.OracleDialect"/>
+            <!--SQL문 로그 설정하기 -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <!--
+                DDL자동생성 옵션설정
+                create, create-drop, update, validate,none으로 설정
+            -->
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>
