@@ -10,7 +10,10 @@ public class Main {
         EntityManager entityManager=JPATemplate.getEntityManagerFactory()
                 .createEntityManager();
         BasicJpaController controller=new BasicJpaController();
-        controller.basicTest(entityManager);
+//        controller.basicTest(entityManager);
+//        controller.searchTest(entityManager);
+//        controller.insertMember(entityManager);
+        controller.selectMember(entityManager);
 
     }
 }
