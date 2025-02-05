@@ -1,10 +1,14 @@
 package com.jpa.controller;
 
+import com.jpa.common.Gender;
 import com.jpa.common.Role;
 import com.jpa.model.entity.MemberEntity;
 import com.jpa.model.entity.SampleEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+
+import java.util.Date;
+import java.util.List;
 
 public class BasicJpaController {
     public void basicTest(EntityManager em){
@@ -42,7 +46,7 @@ public class BasicJpaController {
         EntityTransaction et=em.getTransaction();
         et.begin();
         MemberEntity m = MemberEntity.builder()
-                .memberId("admin").memberPwd("1234").memberName("관리자")
+                .memberId("admin").memberPwd("1234").memberName("관리자").memberGender(Gender.F)
                 .memberAge(19).role(Role.ADMIN).build();
         em.persist(m);
         et.commit();
@@ -53,4 +57,46 @@ public class BasicJpaController {
         System.out.println(member);
     }
 
+
+    public void insertMember2(EntityManager em){
+        EntityTransaction et=em.getTransaction();
+        et.begin();
+        MemberEntity m = MemberEntity.builder()
+                .memberId("user01")
+                .memberPwd("123456")
+                .memberName("유저1")
+                .memberGender(Gender.F)
+                .memberAge(19).role(Role.USER)
+                .birthDay(new Date())
+                .sessionLog(new Date())
+                .build();
+
+        em.persist(m);
+        et.commit();
+    }
+
+    public void selectMember2(EntityManager em,Long id){
+        MemberEntity m = em.find(MemberEntity.class, id);
+        m.setTest("우와!");
+        m.setTest3(List.of("1","2","3"));
+        System.out.println(m);
+
+    }
+
+    public void insertMember3(EntityManager em) {
+        EntityTransaction et=em.getTransaction();
+        et.begin();
+        MemberEntity m = MemberEntity.builder()
+                .memberId("user01")
+                .memberPwd("123456")
+                .memberName("유저1")
+                .memberGender(Gender.F)
+                .memberAge(19).role(Role.USER)
+                .birthDay(new Date())
+                .sessionLog(new Date())
+                .build();
+
+        em.persist(m);
+        et.commit();
+    }
 }
