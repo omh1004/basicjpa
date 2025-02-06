@@ -1,35 +1,54 @@
 package com.jpa.model.entity;
 
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+import java.util.ArrayList;
 
+@Data@AllArgsConstructor@NoArgsConstructor@Builder
 
 @Entity
-@Table(name = "employee")
-@SequenceGenerator(name = "seqempen" , sequenceName = "seq_emp_no",allocationSize = 1, initialValue = 1)
+@Table(name="employee")
+@SequenceGenerator(name="seqEmployeeno",
+        sequenceName = "seq_employee_no",
+        allocationSize = 1)
 public class EmployeeEntity {
-
         @Id
-        @GeneratedValue(generator = "segempen",strategy = GenerationType.SEQUENCE)
-        private long empNo;
+        @GeneratedValue(generator = "seqEmployeeno",
+                strategy = GenerationType.SEQUENCE)
+        private Long employeeNo;
 
-        private String empName;
-        private Integer empAge;
-        private String address;
-        private Integer gumyu;
+        @Column(nullable = false)
+        private String employeeName;
 
-        //private
+        private Integer employeeAge;
+
+        private String employeeAddress;
+
+        @Column(name="employee_salary")
+        private Integer employeeSalary;
+
+        @ToString.Exclude
         @ManyToOne
-        private DepartmentEntity depart;
+        //@Column(name="department_ref")//일반 컬럼을 설정할때
+        @JoinColumn(name="department_ref")
+        private DepartmentEntity department;
+
+
+        public void setDepartment(DepartmentEntity department){
+                if(this.department!=null
+                        &&this.department.getEmployees()!=null){
+                        this.department.getEmployees().remove(this);
+                }
+
+                this.department=department;
+
+                if(this.department.getEmployees()==null) {
+                        this.department.setEmployees(new ArrayList());
+                }
+                this.department.getEmployees().add(this);
+
+        }
 
 
 

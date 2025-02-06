@@ -1,8 +1,10 @@
 package com.jpa.model.entity;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -12,18 +14,18 @@ import java.util.List;
 @Builder
 
 @Entity
-@Table(name = "department")
-@SequenceGenerator(name = "seqdepartno",sequenceName = "seq_depart_no",allocationSize = 1, initialValue = 1)
+@Table(name="department")
+@SequenceGenerator(name="seqDepartmentno",
+        sequenceName = "seq_department_no",
+        allocationSize = 1)
 public class DepartmentEntity {
-
     @Id
-    @GeneratedValue(generator = "seqdepartno",strategy = GenerationType.SEQUENCE)
-    private long deptNo;
+    @GeneratedValue(generator = "seqDepartmentno",strategy = GenerationType.SEQUENCE)
+    private Long departmentNo;
 
-    @Column(columnDefinition = "varchar2(20) not null")
-    private String deptName;
+    @Column(nullable = false)
+    private String departmentName;
 
-    @OneToMany(mappedBy = "depart")
-    @ToString.Exclude
-    private List<EmployeeEntity> emploees;
+    @OneToMany(mappedBy="department")
+    private List<EmployeeEntity> employees;
 }

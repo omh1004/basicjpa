@@ -3,12 +3,11 @@ package com.jpa.model.entity;
 import com.jpa.common.Gender;
 import com.jpa.model.dto.Address;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -52,5 +51,9 @@ public class StudentEntity {
 
     @ManyToOne
     private ClassRoomEntity classroom;
+
+    @ManyToMany(mappedBy = "studentList")
+    @ToString.Exclude
+    private List<SubjectEntity> subjectList= new ArrayList<>();
 
 }

@@ -5,6 +5,7 @@ import com.jpa.model.dto.Address;
 import com.jpa.model.entity.ClassRoomEntity;
 import com.jpa.model.entity.LockerEntity;
 import com.jpa.model.entity.StudentEntity;
+import com.jpa.model.entity.SubjectEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
@@ -199,6 +200,89 @@ public class StudentController {
         findRoom.getStudents().stream().forEach(System.out::println);
 
     }
+
+    //다대다 이용하기
+    public void manyToManyTest(EntityManager em){
+        em.getTransaction().begin();
+
+        SubjectEntity sub1=new SubjectEntity();
+        sub1.setSubjectName("수학");
+        sub1.setSubjectFee(100);
+
+
+        SubjectEntity sub2=new SubjectEntity();
+        sub2.setSubjectName("자바");
+        sub2.setSubjectFee(50);
+
+        SubjectEntity sub3=new SubjectEntity();
+        sub3.setSubjectName("bs어");
+        sub3.setSubjectFee(5);
+
+        StudentEntity s=new StudentEntity();
+        s.setStudentName("우감자");
+        s.setClassNum(1);
+        s.setGrade(1);
+        s.setGender(Gender.F);
+        s.setClassroom(ClassRoomEntity.builder()
+                .classroomLevel("11층")
+                .classroomName("햇님반")
+                .build());
+        StudentEntity s1=new StudentEntity();
+        s1.setStudentName("김통통");
+        s1.setClassNum(5);
+        s1.setGrade(3);
+        s1.setGender(Gender.M);
+        s1.setClassroom(ClassRoomEntity.builder()
+                .classroomLevel("11층")
+                .classroomName("꽃님반")
+                .build());
+
+        StudentEntity s2=new StudentEntity();
+        s2.setStudentName("최선생");
+        s2.setClassNum(9);
+        s2.setGrade(1);
+        s2.setGender(Gender.M);
+        s2.setClassroom(ClassRoomEntity.builder()
+                .classroomLevel("11층")
+                .classroomName("해바라기반")
+                .build());
+
+        em.persist(sub1);
+        em.persist(sub2);
+        em.persist(sub3);
+
+        em.persist(s);
+        em.persist(s1);
+        em.persist(s2);
+
+        em.persist(s.getClassroom());
+        em.persist(s1.getClassroom());
+        em.persist(s2.getClassroom());
+
+        sub1.setStudentList(new ArrayList(List.of(s1,s)));
+        sub2.setStudentList(new ArrayList(List.of(s2,s1)));
+        sub3.setStudentList(new ArrayList(List.of(s2,s1,s)));
+
+
+
+        em.getTransaction().commit();
+
+        //em.clear();
+
+        SubjectEntity findSubject=em.find(SubjectEntity.class,1);
+        System.out.println(findSubject.getSubjectName()+" "+findSubject.getSubjectFee());
+        System.out.println("수강신청학생");
+        findSubject.getStudentList().forEach(student->{
+            System.out.println(student.getStudentName()+"학생 수강신청과목");
+            for(SubjectEntity subject : student.getSubjectList()){
+                System.out.println(subject.getSubjectName()+" "+subject.getSubjectFee());
+            }
+        });
+
+
+
+    }
+
 
 
 

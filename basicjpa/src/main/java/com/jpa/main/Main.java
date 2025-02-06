@@ -4,55 +4,49 @@ import com.jpa.common.JPATemplate;
 import com.jpa.controller.BasicJpaController;
 import com.jpa.controller.EmployeeController;
 import com.jpa.controller.StudentController;
+import com.jpa.model.entity.EmployeeEntity;
+import com.jpa.model.entity.SampleEntity;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.*;
-import java.util.Scanner;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-
-       // BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-       // Scanner scanner = new Scanner(System.in);
-
-     //   System.out.println("번호입력 : ");
-//        Long input = Long.parseLong(br.readLine());
- //       long input2 = scanner.nextLong();
-//        scanner.nextLine();
-      //  scanner.close();
-
-
-
+    public static void main(String[] args) {
         //EntityManager객체 가져오기
         EntityManager entityManager=JPATemplate.getEntityManagerFactory()
                 .createEntityManager();
-     //   BasicJpaController controller=new BasicJpaController();
+        BasicJpaController controller=new BasicJpaController();
 //        controller.basicTest(entityManager);
 //        controller.searchTest(entityManager);
-      //  controller.insertMember(entityManager);
-        //controller.selectMember(entityManager);
-       // controller.insertMember2(entityManager);
-        //controller.selectMember2(entityManager,52L);
-        //controller.insertMember3(entityManager);
+//        controller.insertMember(entityManager);
+//        controller.selectMember(entityManager);
+//        controller.insertMember2(entityManager);
+//        controller.selectMember2(entityManager,21L);
 
-        StudentController controller= new StudentController();
+        StudentController studentController=new StudentController();
+//        studentController.saveStudent(entityManager);
+//        studentController.updateStudent(entityManager,1L);
+//        studentController.deleteStudent(entityManager,1L);
+//        studentController.findStudentByNo(entityManager,13L);
+//        studentController.findStudent(entityManager);
 
-       // controller.saveStudent(entityManager);
-        //controller.findStudent(entityManager);
-        //controller.findStudentByNo(entityManager,11L);
-        //controller.updateStudent(entityManager,input2);
-       // controller.deleteStudent(entityManager,input2);
+//        studentController.oneToOneTest(entityManager);
 
-       // controller.OneToManyTest(entityManager);
-        //controller.oneToManySelect(entityManager,1L);
-        controller.oneToManyTest2(entityManager);
+//        findByStudentNameAndGrade("아무개",3);
+//        studentController.OneToManyTest(entityManager);
+        //studentController.oneToManySelect(entityManager,1L);
+        //studentController.oneToManyTest2(entityManager);
 
-        EmployeeController employeeController = new EmployeeController();
+//        EmployeeController ec=new EmployeeController();
+//        ec.saveData(entityManager);
+//        ec.searchData(entityManager);
 
-        employeeController.saveEmployee(entityManager);
+        studentController.manyToManyTest(entityManager);
+
     }
 }
+
+

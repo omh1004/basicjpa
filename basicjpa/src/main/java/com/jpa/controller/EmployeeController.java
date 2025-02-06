@@ -5,42 +5,71 @@ import com.jpa.model.entity.EmployeeEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
+import java.util.List;
+
 public class EmployeeController {
 
-    public void saveEmployee(EntityManager em){
-        EntityTransaction et  = em.getTransaction();
-
+    public void saveData(EntityManager em){
+        EntityTransaction et=em.getTransaction();
         et.begin();
-
-        DepartmentEntity depart = DepartmentEntity.builder().deptName("개발").build();
-        em.persist(depart);
-
-        EmployeeEntity saveEmployee = EmployeeEntity.builder()
-                .empName("유병승")
-                .empAge(19)
-                .address("경기도시흥시")
-                .gumyu(100)
-                .depart(depart)
+        DepartmentEntity dept=DepartmentEntity.builder()
+                .departmentName("개발팀")
                 .build();
-        em.persist(saveEmployee);
-        EmployeeEntity saveEmployee1 = EmployeeEntity.builder()
-                .empName("오민현")
-                .empAge(22)
-                .address("경기도안양시")
-                .gumyu(200)
-                .depart(depart)
+        DepartmentEntity dept1=DepartmentEntity.builder()
+                .departmentName("경영팀")
                 .build();
+        em.persist(dept);
+        em.persist(dept1);
 
-        em.persist(saveEmployee1);
+        EmployeeEntity e= EmployeeEntity.builder()
+                .employeeAge(19)
+                .employeeName("유병승")
+                .employeeAddress("경기도 시흥시")
+                .employeeSalary(100)
+//                .department(dept)
+                .build();
+        //편의 기능을 제공하는 setter로 데이터 저장
+        e.setDepartment(dept);
+
+        EmployeeEntity e1= EmployeeEntity.builder()
+                .employeeAge(27)
+                .employeeName("이민영")
+                .employeeAddress("경기도 군포시")
+                .employeeSalary(200)
+//                .department(dept)
+                .build();
+        e1.setDepartment(dept);
+
+        EmployeeEntity e2= EmployeeEntity.builder()
+                .employeeAge(25)
+                .employeeName("염상균")
+                .employeeAddress("경기도 안양시")
+                .employeeSalary(150)
+//                .department(dept1)
+                .build();
+        e2.setDepartment(dept1);
+
+        em.persist(e);
+        em.persist(e1);
+        em.persist(e2);
+
+//        dept.setEmployees(List.of(e,e1));
+//        dept1.setEmployees(List.of(e2));
 
         et.commit();
-        em.clear();
 
-        DepartmentEntity departmentEntity = em.find(DepartmentEntity.class,1L);
-
-        departmentEntity.getEmploees().forEach(System.out::println);
-
-        EmployeeEntity employeeEntity = em.find(EmployeeEntity.class,1L);
-        System.out.println(employeeEntity.getDepart().getDeptName());
     }
+
+    public void searchData(EntityManager em){
+//        em.clear();
+        DepartmentEntity findDepartment=
+                em.find(DepartmentEntity.class,1);
+        System.out.println(findDepartment);
+        findDepartment=
+                em.find(DepartmentEntity.class,2);
+        System.out.println(findDepartment);
+
+
+    }
+
 }
