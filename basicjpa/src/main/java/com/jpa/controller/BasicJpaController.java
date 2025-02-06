@@ -67,8 +67,6 @@ public class BasicJpaController {
                 .memberName("유저1")
                 .memberGender(Gender.F)
                 .memberAge(19).role(Role.USER)
-                .birthDay(new Date())
-                .sessionLog(new Date())
                 .build();
 
         em.persist(m);
@@ -78,7 +76,7 @@ public class BasicJpaController {
     public void selectMember2(EntityManager em,Long id){
         MemberEntity m = em.find(MemberEntity.class, id);
         m.setTest("우와!");
-        m.setTest3(List.of("1","2","3"));
+
         System.out.println(m);
 
     }
@@ -92,8 +90,6 @@ public class BasicJpaController {
                 .memberName("유저1")
                 .memberGender(Gender.F)
                 .memberAge(19).role(Role.USER)
-                .birthDay(new Date())
-                .sessionLog(new Date())
                 .build();
 
         em.persist(m);

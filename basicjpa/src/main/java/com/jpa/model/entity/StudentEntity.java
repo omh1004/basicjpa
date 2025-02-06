@@ -11,35 +11,46 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Entity
-@SequenceGenerator(name = "seqMemberEntityNo"
-        , sequenceName = "seq_studentno"
-        ,allocationSize= 1, initialValue = 10)
-@Table(name ="student_entity")
-public class StudentEntity {
 
+@Entity
+@Table(name="student_entity")
+@SequenceGenerator(name="seqStudentNo",
+        sequenceName = "seq_studentno", initialValue = 10,allocationSize = 1)
+public class StudentEntity {
     @Id
-    @GeneratedValue(generator = "seqMemberEntityNo",strategy = GenerationType.SEQUENCE)
+    @Column(name="student_no")
+    @GeneratedValue(generator ="seqStudentNo" ,strategy = GenerationType.SEQUENCE)
     private Long studentNo;
-    @Column(name = "student_studentname", nullable = false)
+
+    @Column(name="student_name",nullable=false)
     private String studentName;
-    @Column(name="student_grade", nullable = false)
+
+    @Column(name="student_grade")
     private Integer grade;
-    @Column(name = "student_classNum")
+
+    @Column(name="student_classnum")
     private Integer classNum;
-//    @Column(columnDefinition = "Date default sysdate")
-    @Temporal(TemporalType.DATE)
-    private Date birthDay = new Date();
-    @Column(name = "student_gender")
+
+    @Column(name="student_gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
-    //@Column(name = "student_address")
-    @Embedded
-    private Address address;
 
+//    @Column(name="student_birthday",nullable = false,columnDefinition = "DATE default sysdate")
+//    private Date birthday;
+//    @Temporal(TemporalType.DATE)
+//    private Date birthday=new Date();
 
+//    @Embedded
+//    private Address address;
+
+    @OneToOne
+    @JoinColumn(name="locker_no",unique = true)
+    private LockerEntity locker;
+
+    @ManyToOne
+    private ClassRoomEntity classroom;
 
 }

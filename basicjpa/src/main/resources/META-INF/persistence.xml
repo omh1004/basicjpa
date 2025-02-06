@@ -27,7 +27,7 @@
                 DDL자동생성 옵션설정
                 create, create-drop, update, validate,none으로 설정
             -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 
