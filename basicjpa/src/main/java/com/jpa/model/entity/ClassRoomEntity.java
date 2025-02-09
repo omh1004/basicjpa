@@ -23,8 +23,8 @@ public class ClassRoomEntity {
     private String classroomName;
 
     private String classroomLevel;
-
+    //단방향 설정
     @ToString.Exclude
-    @OneToMany(mappedBy = "classroom")//양방향 설정
+    @OneToMany(mappedBy="classroom")//양방향 설정
     private List<StudentEntity> students;
 }

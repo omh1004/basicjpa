@@ -13,43 +13,41 @@ import java.util.ArrayList;
         sequenceName = "seq_employee_no",
         allocationSize = 1)
 public class EmployeeEntity {
-        @Id
-        @GeneratedValue(generator = "seqEmployeeno",
-                strategy = GenerationType.SEQUENCE)
-        private Long employeeNo;
+    @Id
+    @GeneratedValue(generator = "seqEmployeeno",
+            strategy = GenerationType.SEQUENCE)
+    private Long employeeNo;
 
-        @Column(nullable = false)
-        private String employeeName;
+    @Column(nullable = false)
+    private String employeeName;
 
-        private Integer employeeAge;
+    private Integer employeeAge;
 
-        private String employeeAddress;
+    private String employeeAddress;
 
-        @Column(name="employee_salary")
-        private Integer employeeSalary;
+    @Column(name="employee_salary")
+    private Integer employeeSalary;
 
-        @ToString.Exclude
-        @ManyToOne
-        //@Column(name="department_ref")//일반 컬럼을 설정할때
-        @JoinColumn(name="department_ref")
-        private DepartmentEntity department;
+    @ToString.Exclude
+    @ManyToOne
+    //@Column(name="department_ref")//일반 컬럼을 설정할때
+    @JoinColumn(name="department_ref")
+    private DepartmentEntity department;
 
 
-        public void setDepartment(DepartmentEntity department){
-                if(this.department!=null
-                        &&this.department.getEmployees()!=null){
-                        this.department.getEmployees().remove(this);
-                }
-
-                this.department=department;
-
-                if(this.department.getEmployees()==null) {
-                        this.department.setEmployees(new ArrayList());
-                }
-                this.department.getEmployees().add(this);
-
+    public void setDepartment(DepartmentEntity department){
+        if(this.department!=null
+                &&this.department.getEmployees()!=null){
+            this.department.getEmployees().remove(this);
         }
 
+        this.department=department;
 
+        if(this.department.getEmployees()==null) {
+            this.department.setEmployees(new ArrayList());
+        }
+         this.department.getEmployees().add(this);
+
+    }
 
 }

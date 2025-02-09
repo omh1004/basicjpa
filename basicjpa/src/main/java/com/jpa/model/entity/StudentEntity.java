@@ -52,8 +52,9 @@ public class StudentEntity {
     @ManyToOne
     private ClassRoomEntity classroom;
 
-    @ManyToMany(mappedBy = "studentList")
     @ToString.Exclude
-    private List<SubjectEntity> subjectList= new ArrayList<>();
+    @ManyToMany(mappedBy = "studentList")
+    private List<SubjectEntity> subjectList=new ArrayList<>();
+
 
 }

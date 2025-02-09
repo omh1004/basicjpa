@@ -1,14 +1,12 @@
 package com.jpa.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.xml.namespace.QName;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +16,12 @@ import javax.xml.namespace.QName;
 @Entity
 public class SampleEntity {
     @Id
-    private long id;
-    @Column(name="sample_data")
+    private Long id;
+    @Column(name="data")
     private String data;
+
+
+
+
+
 }

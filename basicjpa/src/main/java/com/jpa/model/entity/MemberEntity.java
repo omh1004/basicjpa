@@ -22,10 +22,10 @@ import java.util.List;
 //테이블 관련 설정을 하는 어노테이션
 @Table(name="MEMBER_ENTITY",
         uniqueConstraints = {
-                @UniqueConstraint(name="uq_memberId_memberName",
-                        columnNames = {"member_id","memberName"})},
+        @UniqueConstraint(name="uq_memberId_memberName",
+                columnNames = {"member_id","memberName"})},
         indexes = {
-                @Index(name="idx_memberId", columnList = "member_id,phone")
+         @Index(name="idx_memberId", columnList = "member_id,phone")
         })
 //sequence객체를 생성하는 어노테이션
 @SequenceGenerator(name="seqMemberEntityNo",
@@ -70,11 +70,11 @@ public class MemberEntity {
     @Transient
     private List<String> names;
 
-    @Lob//clob
-    private String description;
+//    @Lob//clob
+//    private String description;
 
-    @Lob//blob
-    private Byte[] bytes;
+//    @Lob//blob
+//    private Byte[] bytes;
 
     //sql문으로 컬럼을 만드는 구문을 작성
     @Column(columnDefinition = "varchar2(20) default '없음' not null")
