@@ -3,17 +3,19 @@ package com.jpa.common;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-import jakarta.persistence.EntityManager;
-
 public class JPATemplate {
 
     private static EntityManagerFactory emf;
 
-
-    public JPATemplate() {}
+    private JPATemplate(){}
     public static EntityManagerFactory getEntityManagerFactory(){
-        if(emf == null)
-            emf = Persistence.createEntityManagerFactory("basicjpa");
+        if(emf==null)
+            emf=Persistence.createEntityManagerFactory("basicjpa");
+        return emf;
+    }
+    public static EntityManagerFactory getWebEntityFactory(){
+        if(emf==null)
+            emf=Persistence.createEntityManagerFactory("web");
         return emf;
     }
 }

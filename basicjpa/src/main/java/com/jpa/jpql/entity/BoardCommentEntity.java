@@ -28,10 +28,13 @@ public class BoardCommentEntity {
     private String boardCommentContent;
     @Column(name="BOARD_COMMENT_DATE")
     private Date boardCommentDate;
-
+//
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name="BOARD_REF")
     private BoardEntity boardRef;
+
+//    @Column(name = "BOARD_REF")
+//    private Long boardRef;
 
 }

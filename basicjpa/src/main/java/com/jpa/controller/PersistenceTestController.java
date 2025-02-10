@@ -1,7 +1,7 @@
 package com.jpa.controller;
 
-import com.jpa.model.영속성전이.PersistenceChildEntity;
-import com.jpa.model.영속성전이.PersistenceParentEntity;
+import com.jpa.model.영속성전이.PersistenceChildEntity;
+import com.jpa.model.영속성전이.PersistenceParentEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
