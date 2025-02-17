@@ -69,6 +69,7 @@ public class WebController {
         //JPQL에서 where절 사용하기
         //표준 SQL과 동일하게 사용할 수 있음
         //where절에 대상이 되는 항목은 엔티티의 필드로 설정
+        //TypedQuery의 상위 객체(부모객체 )는 Query 이다.
         String jsql="select b from board b where b.boardWriter.userId='admin'";
         TypedQuery<BoardEntity> tquery=em.createQuery(jsql,BoardEntity.class);
         System.out.println(tquery.getResultStream().count());
