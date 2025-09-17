@@ -45,7 +45,7 @@ public class SubjectEntity {
             }
             students.forEach(student -> {
                 //상대방 엔티티에 과목을 추가
-                student.getSubjectList().add(this);
+                student.getSubjectList().add(
             });
             this.studentList = students;
         } else {
